@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="password" id="password" name="password" required>
                     <p class="password-hint"></p>
                 </div>
-                <button type="submit">Iniciar Sesión</button>
+                <button type="submit">Iniciar Sesión</button> 
             </form>
         </div>
     </div>
