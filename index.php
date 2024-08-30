@@ -1,9 +1,28 @@
 <?php
-session_start();
-$error_message = '';
+// Habilitar la visualización de errores para depuración
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include 'login.php';
+// Inicializar la sesión (solo si no está ya iniciada)
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Verificar si el usuario ya ha iniciado sesión, si es así, redirigir a la página de bienvenida
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    header("Location: dashboard.php");
+    exit;
+}
+
+// Definir variables e inicializar con valores vacíos
+$username = $password = "";
+$username_err = $password_err = $login_err = "";
+
+// Procesar datos del formulario cuando se envía el formulario
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    // Incluir archivo de login
+    require_once "login.php";
 }
 ?>
 <!DOCTYPE html>
@@ -19,22 +38,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="login-box">
             <h1>Depósito el Rosario</h1>
             <h2>Sistema de Inventarios</h2>
-            <?php
-            if (!empty($error_message)) {
-                echo "<p class='error-message'>$error_message</p>";
-            }
+            <?php 
+            if(!empty($login_err)){
+                echo '<div class="error-message">' . htmlspecialchars($login_err) . '</div>';
+            }        
             ?>
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="input-group">
                     <label for="username">Usuario:</label>
-                    <input type="text" id="username" name="username" value="Ingrese su usuario" onfocus="this.value=''" required>
+                    <input type="text" id="username" name="username" required value="<?php echo htmlspecialchars($username ?? ''); ?>">
+                    <?php 
+                    if(!empty($username_err)){
+                        echo '<span class="error-message">' . htmlspecialchars($username_err) . '</span>';
+                    }
+                    ?>
                 </div>
                 <div class="input-group">
                     <label for="password">Contraseña:</label>
                     <input type="password" id="password" name="password" required>
-                    <p class="password-hint"></p>
+                    <?php 
+                    if(!empty($password_err)){
+                        echo '<span class="error-message">' . htmlspecialchars($password_err) . '</span>';
+                    }
+                    ?>
+                    <p class="password-hint">La contraseña distingue entre mayúsculas y minúsculas</p>
                 </div>
-                <button type="submit">Iniciar Sesión</button> 
+                <button type="submit">Iniciar Sesión</button>
             </form>
         </div>
     </div>
