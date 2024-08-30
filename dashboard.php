@@ -61,7 +61,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
             <div class="summary-card">
                 <h3>Valor del Inventario</h3>
-                <p class="summary-number">$123,456</p>
+                <p class="summary-number">Q.123,456</p>
             </div>
         </section>
         
@@ -106,21 +106,21 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <td>Juan Pérez</td>
                         <td>2023-05-15</td>
                         <td>En proceso</td>
-                        <td>$500</td>
+                        <td>Q.500</td>
                     </tr>
                     <tr>
                         <td>002</td>
                         <td>María Gómez</td>
                         <td>2023-05-14</td>
                         <td>Enviado</td>
-                        <td>$750</td>
+                        <td>Q.750</td>
                     </tr>
                     <tr>
                         <td>003</td>
                         <td>Carlos Rodríguez</td>
                         <td>2023-05-13</td>
                         <td>Entregado</td>
-                        <td>$1000</td>
+                        <td>Q.1000</td>
                     </tr>
                 </tbody>
             </table>
@@ -154,7 +154,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             <div class="section-grid">
                 <div class="section-card">
                     <h3>Ventas mensuales</h3>
-                    <p>Total: $50,000</p>
+                    <p>Total: Q.50,000</p>
                     <p>Crecimiento: +5%</p>
                 </div>
                 <div class="section-card">
