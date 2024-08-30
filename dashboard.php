@@ -22,17 +22,13 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#"><span class="icon">📦</span> Inventario</a></li>
-                    <li><a href="#"><span class="icon">📋</span> Pedidos</a></li>
-                    <li><a href="#"><span class="icon">🚚</span> Proveedores</a></li>
-                    <li><a href="#"><span class="icon">📊</span> Reportes</a></li>
+                    <li><a href="#inventario"><span class="icon">📦</span> Inventario</a></li>
+                    <li><a href="#pedidos"><span class="icon">📋</span> Pedidos</a></li>
+                    <li><a href="#proveedores"><span class="icon">🚚</span> Proveedores</a></li>
+                    <li><a href="#reportes"><span class="icon">📊</span> Reportes</a></li>
                 </ul>
             </nav>
             <div class="user-menu">
-                <div class="theme-switch">
-                    <input type="checkbox" id="theme-toggle">
-                    <label for="theme-toggle">Cambiar tema</label>
-                </div>
                 <div class="user-dropdown">
                     <button class="user-button">
                         <img src="https://via.placeholder.com/32" alt="Usuario" class="user-avatar">
@@ -41,7 +37,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     </button>
                     <ul class="dropdown-menu">
                         <li><a href="#"><span class="icon">👤</span> Perfil</a></li>
-                        <li><a href="#"><span class="icon">⚙️</span> Configuración</a></li>
+                        <li><a href="configuracion.php"><span class="icon">⚙️</span> Configuración</a></li>
+                        <li><a href="#" id="theme-toggle"><span class="icon theme-icon">🌞</span> <span class="theme-text">Cambiar a modo oscuro</span></a></li>
                         <li><a href="logout.php"><span class="icon">🚪</span> Cerrar sesión</a></li>
                     </ul>
                 </div>
@@ -67,34 +64,107 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                 <p class="summary-number">$123,456</p>
             </div>
         </section>
-        <section class="recent-activity">
-            <h2>Actividad Reciente</h2>
+        
+        <section id="inventario" class="section">
+            <h2>Inventario</h2>
+            <div class="section-grid">
+                <div class="section-card">
+                    <h3>Productos más vendidos</h3>
+                    <ul>
+                        <li>Producto A - 100 unidades</li>
+                        <li>Producto B - 85 unidades</li>
+                        <li>Producto C - 70 unidades</li>
+                    </ul>
+                </div>
+                <div class="section-card">
+                    <h3>Productos con bajo stock</h3>
+                    <ul>
+                        <li>Producto X - 5 unidades</li>
+                        <li>Producto Y - 3 unidades</li>
+                        <li>Producto Z - 2 unidades</li>
+                    </ul>
+                </div>
+            </div>
+            <a href="#" class="btn">Ver inventario completo</a>
+        </section>
+        
+        <section id="pedidos" class="section">
+            <h2>Pedidos</h2>
             <table>
                 <thead>
                     <tr>
+                        <th>ID Pedido</th>
+                        <th>Cliente</th>
                         <th>Fecha</th>
-                        <th>Actividad</th>
-                        <th>Usuario</th>
+                        <th>Estado</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>2023-05-15</td>
-                        <td>Ingreso de nuevo producto: Tornillos 3/4"</td>
+                        <td>001</td>
                         <td>Juan Pérez</td>
+                        <td>2023-05-15</td>
+                        <td>En proceso</td>
+                        <td>$500</td>
                     </tr>
                     <tr>
-                        <td>2023-05-14</td>
-                        <td>Actualización de stock: Cemento Portland</td>
+                        <td>002</td>
                         <td>María Gómez</td>
+                        <td>2023-05-14</td>
+                        <td>Enviado</td>
+                        <td>$750</td>
                     </tr>
                     <tr>
-                        <td>2023-05-13</td>
-                        <td>Pedido realizado: 100 unidades de Ladrillos</td>
+                        <td>003</td>
                         <td>Carlos Rodríguez</td>
+                        <td>2023-05-13</td>
+                        <td>Entregado</td>
+                        <td>$1000</td>
                     </tr>
                 </tbody>
             </table>
+            <a href="#" class="btn">Ver todos los pedidos</a>
+        </section>
+        
+        <section id="proveedores" class="section">
+            <h2>Proveedores</h2>
+            <div class="section-grid">
+                <div class="section-card">
+                    <h3>Proveedor A</h3>
+                    <p>Productos: 50</p>
+                    <p>Última entrega: 2023-05-10</p>
+                </div>
+                <div class="section-card">
+                    <h3>Proveedor B</h3>
+                    <p>Productos: 35</p>
+                    <p>Última entrega: 2023-05-08</p>
+                </div>
+                <div class="section-card">
+                    <h3>Proveedor C</h3>
+                    <p>Productos: 40</p>
+                    <p>Última entrega: 2023-05-12</p>
+                </div>
+            </div>
+            <a href="#" class="btn">Gestionar proveedores</a>
+        </section>
+        
+        <section id="reportes" class="section">
+            <h2>Reportes</h2>
+            <div class="section-grid">
+                <div class="section-card">
+                    <h3>Ventas mensuales</h3>
+                    <p>Total: $50,000</p>
+                    <p>Crecimiento: +5%</p>
+                </div>
+                <div class="section-card">
+                    <h3>Productos más rentables</h3>
+                    <p>1. Producto X</p>
+                    <p>2. Producto Y</p>
+                    <p>3. Producto Z</p>
+                </div>
+            </div>
+            <a href="#" class="btn">Ver reportes detallados</a>
         </section>
     </main>
     <script src="script.js"></script>

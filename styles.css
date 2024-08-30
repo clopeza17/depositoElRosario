@@ -178,3 +178,38 @@ button:hover {
         font-size: 14px;
     }
 }
+.input-group {
+    margin-bottom: 15px;
+}
+
+.password-input-wrapper {
+    position: relative;
+}
+
+.caps-lock-warning {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin-top: 5px;
+    font-size: 0.9em;
+    z-index: 1;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: #999;
+}

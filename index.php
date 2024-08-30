@@ -1,13 +1,6 @@
 <?php
-// Habilitar la visualización de errores para depuración
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Inicializar la sesión (solo si no está ya iniciada)
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+// Inicializar la sesión
+session_start();
 
 // Verificar si el usuario ya ha iniciado sesión, si es así, redirigir a la página de bienvenida
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
@@ -15,16 +8,10 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     exit;
 }
 
-// Definir variables e inicializar con valores vacíos
-$username = $password = "";
-$username_err = $password_err = $login_err = "";
-
-// Procesar datos del formulario cuando se envía el formulario
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    // Incluir archivo de login
-    require_once "login.php";
-}
+// Incluir archivo de configuración
+require_once "login.php";
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -46,7 +33,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="input-group">
                     <label for="username">Usuario:</label>
-                    <input type="text" id="username" name="username" required value="<?php echo htmlspecialchars($username ?? ''); ?>">
+                    <input type="text" id="username" name="username" required value="<?php echo htmlspecialchars($username ?? ''); ?>" placeholder="Ingrese su nombre de usuario">
                     <?php 
                     if(!empty($username_err)){
                         echo '<span class="error-message">' . htmlspecialchars($username_err) . '</span>';
@@ -55,13 +42,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
                 <div class="input-group">
                     <label for="password">Contraseña:</label>
-                    <input type="password" id="password" name="password" required>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password" required placeholder="Ingrese su contraseña">
+                        <div id="capsLockWarning" class="caps-lock-warning" style="display: none;">Bloq Mayús está activado</div>
+                    </div>
                     <?php 
                     if(!empty($password_err)){
                         echo '<span class="error-message">' . htmlspecialchars($password_err) . '</span>';
                     }
                     ?>
-                    <p class="password-hint">La contraseña distingue entre mayúsculas y minúsculas</p>
                 </div>
                 <button type="submit">Iniciar Sesión</button>
             </form>
@@ -72,5 +61,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <label for="theme-toggle">Cambiar tema</label>
     </div>
     <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var input = document.getElementById('password');
+            var warning = document.getElementById('capsLockWarning');
+
+            input.addEventListener("keyup", function(event) {
+                if (event.getModifierState("CapsLock")) {
+                    warning.style.display = "block";
+                } else {
+                    warning.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
